@@ -1,5 +1,5 @@
 {
-  "name": "try",
+  "name": "excel_reorder",
   "version": "1.0.0",
   "main": "main.js",
   "description": "ReOrder My Excel - Electron App",
@@ -16,7 +16,7 @@
   "build": {
     "appId": "com.yourname.reorderexcel",
     "productName": "ReorderExcel",
-    "icon": "assets/icon",
+    "icon": "assets/icon.png",
     "files": [
       "**/*"
     ],
@@ -27,8 +27,9 @@
       "target": "nsis"
     },
     "linux": {
-      "target": ["deb", "AppImage"],
+      "target": ["deb"],
       "category": "Utility",
+      "icon": "assets/icon.png",
       "maintainer": "yakkalivivek <yakkalivivek@gmail.com>"
     }
   },
