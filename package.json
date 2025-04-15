@@ -1,0 +1,42 @@
+{
+  "name": "try",
+  "version": "1.0.0",
+  "main": "main.js",
+  "description": "ReOrder My Excel - Electron App",
+  "author": {
+    "name": "Yakkali Vivek",
+    "email": "yakkalivivek@example.com"
+  },
+  "homepage": "https://github.com/Vivek5170/ReorderExcel",
+  "license": "ISC",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.yourname.reorderexcel",
+    "productName": "ReorderExcel",
+    "icon": "assets/icon",
+    "files": [
+      "**/*"
+    ],
+    "directories": {
+      "buildResources": "assets"
+    },
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": ["deb", "AppImage"],
+      "category": "Utility",
+      "maintainer": "yakkalivivek <yakkalivivek@gmail.com>"
+    }
+  },
+  "devDependencies": {
+    "electron": "^35.1.5",
+    "electron-builder": "^26.0.12"
+  },
+  "dependencies": {
+    "xlsx": "^0.18.5"
+  }
+}

@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>ReOrder My Excel</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            padding: 2rem;
+            background: #f8fafc;
+            max-width: 1800px;
+            margin: 0 auto;
+        }
+    
+        h1 {
+            color: #1e293b;
+            font-weight: 600;
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+            letter-spacing: -0.025em;
+        }
+    
+        #excelFile {
+            padding: 0.75rem 1.5rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            background: white;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+    
+        #excelFile:hover {
+            border-color: #94a3b8;
+        }
+    
+        #saveBtn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-left: 1rem;
+        }
+    
+        #saveBtn:hover {
+            background: #2563eb;
+        }
+    
+        #excelTable-container {
+            overflow: auto;
+            max-height: 68vh;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-top: 2rem;
+        }
+    
+        table {
+            border-collapse: collapse;
+            width: max-content;
+            table-layout: auto;
+            background: white;
+        }
+    
+        th, td {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #f1f5f9;
+            position: relative;
+            font-size: 0.875rem;
+            color: #334155;
+        }
+    
+        thead th {
+            background: #ffffff;
+            font-weight: 600;
+            color: #1e293b;
+            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.05);
+        }
+    
+        tbody tr {
+            transition: background 0.2s ease;
+            cursor: grab;
+        }
+    
+        tbody tr:hover {
+            background: #f8fafc;
+        }
+    
+        tbody tr.dragging {
+            opacity: 0.5;
+            background: #f1f5f9;
+        }
+    
+        tbody tr.drag-over {
+            outline: 2px dashed #3b82f6;
+            outline-offset: -2px;
+        }
+    
+        th .resizer {
+            background: #94a3b8;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            width: 3px;
+        }
+    
+        th:hover .resizer {
+            opacity: 1;
+        }
+    
+        /* Context Menu */
+        #contextMenu {
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+                        0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            border: 1px solid #f1f5f9;
+        }
+    
+        #contextMenu div {
+            padding: 0.75rem 1.5rem;
+            color: #334155;
+            transition: all 0.2s ease;
+        }
+    
+        #contextMenu div:hover {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+    
+        /* Rank Modal */
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+    
+        #rankInput {
+            padding: 0.75rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            width: 100%;
+            margin: 1rem 0;
+            font-size: 1rem;
+        }
+    
+        #rankInput:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+    
+        #submitRank {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 500;
+            transition: background 0.2s ease;
+        }
+    
+        #submitRank:hover {
+            background: #2563eb;
+        }
+    
+        .close {
+            color: #94a3b8;
+            font-size: 1.5rem;
+            line-height: 1;
+            top: -0.5rem;
+            position: relative;
+        }
+    
+        .close:hover {
+            color: #64748b;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Excel Row Reorder App</h1>
+    <input type="file" id="excelFile" />
+    <button id="saveBtn">Save to Excel</button>
+    <div id="excelTable-container">
+        <table id="excelTable">
+            <thead></thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div id="rankModal" style="display: none;" class="modal">
+        <div class="modal-content">
+            <span id="closeModal" class="close">&times;</span>
+            <p>Enter new rank for this row:</p>
+            <input type="number" id="rankInput" min="1" autofocus />
+            <button id="submitRank">Submit</button>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>
